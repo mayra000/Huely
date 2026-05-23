@@ -10,13 +10,14 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SymbolView } from 'expo-symbols';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getTheme, ThemeMode } from '@/constants/theme';
+import { getTheme, GRADIENT_COLORS, ThemeMode } from '@/constants/theme';
 import ColorPreview from './ColorPreview';
 import GuessGrid from './GuessGrid';
 import Keyboard from './Keyboard';
 import RulesModal from './RulesModal';
 import StatsModal from './StatsModal';
 import SuccessModal from './SuccessModal';
+import { useColorScheme } from './useColorScheme';
 import {
   evaluateGuess,
   getDayNumber,
@@ -64,6 +65,7 @@ function IconBtn({
 
 export default function GameScreen() {
   const insets = useSafeAreaInsets();
+  const systemColorScheme = useColorScheme();
   const [themeMode, setThemeMode] = useState<ThemeMode>('light');
   const [ready, setReady] = useState(false);
   const [isPractice, setIsPractice] = useState(false);
@@ -202,9 +204,14 @@ export default function GameScreen() {
 
   if (!ready) {
     return (
-      <View style={styles.loading}>
+      <LinearGradient
+        colors={[...GRADIENT_COLORS[systemColorScheme]]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.loading}
+      >
         <ActivityIndicator size="large" color="#534ab7" />
-      </View>
+      </LinearGradient>
     );
   }
 
@@ -382,7 +389,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e2ebf0',
   },
   content: {
     paddingHorizontal: 16,
