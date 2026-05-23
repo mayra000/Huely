@@ -21,6 +21,7 @@ import {
   evaluateGuess,
   getDayNumber,
   getRandomPracticeColor,
+  getBestColorMatchPercent,
   GuessEntry,
 } from '@/utils/gameLogic';
 import {
@@ -301,6 +302,9 @@ export default function GameScreen() {
             </Text>
             <Text style={[styles.resultSub, { color: theme.textMuted }]}>
               The color was #{target}
+            </Text>
+            <Text style={[styles.resultSub, { color: theme.textMuted }]}>
+              Best guess: {getBestColorMatchPercent(guesses, target)}% color match
             </Text>
             {isPractice && (
               <Pressable
