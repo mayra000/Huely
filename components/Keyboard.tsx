@@ -84,31 +84,31 @@ export default function Keyboard({
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    gap: 6,
+    paddingVertical: 14,
+    paddingHorizontal: 8,
+    gap: 7,
   },
   row: {
     flexDirection: 'row',
-    gap: 5,
+    gap: 6,
     justifyContent: 'center',
   },
   key: {
-    minHeight: 44,
-    borderRadius: 9,
+    minHeight: 48,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
   regularKey: {
     flex: 1,
-    minWidth: 32,
+    minWidth: 36,
   },
   backspaceKey: {
-    minWidth: 44,
-    paddingHorizontal: 16,
+    minWidth: 48,
+    paddingHorizontal: 18,
   },
   keyText: {
-    fontSize: 11,
+    fontSize: 13,
     fontWeight: '600',
   },
   keyPressed: {
@@ -116,17 +116,17 @@ const styles = StyleSheet.create({
   },
   submit: {
     width: '100%',
-    minHeight: 44,
+    minHeight: 48,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 2,
+    marginTop: 3,
   },
   submitDisabled: {
     opacity: 0.5,
   },
   submitText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '600',
     letterSpacing: 0.5,
   },

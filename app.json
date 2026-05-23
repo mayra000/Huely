@@ -10,6 +10,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.huely.app",
+      "infoPlist": {
+        "NSLocalNetworkUsageDescription": "Huely uses the local network during development to load JavaScript from Metro on your computer.",
+        "NSBonjourServices": [
+          "_http._tcp"
+        ]
+      },
       "icon": {
         "light": "./assets/images/ios-icon-light.png",
         "dark": "./assets/images/ios-icon-dark.png"
@@ -36,7 +42,7 @@
         {
           "backgroundColor": "#c9d6df",
           "dark": {
-            "backgroundColor": "#1a1a2e"
+            "backgroundColor": "#c9d6df"
           }
         }
       ],

@@ -1,17 +1,34 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { getTheme, GRADIENT_COLORS } from '@/constants/theme';
 import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+    evaluateGuess,
+    getBestColorMatchPercent,
+    getDayNumber,
+    getRandomPracticeColor,
+    GuessEntry,
+} from '@/utils/gameLogic';
+import {
+    createFreshDailyState,
+    DailyState,
+    loadDailyState,
+    loadStats,
+    saveDailyState,
+    Stats,
+    updateStatsAfterGame,
+} from '@/utils/storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SymbolView } from 'expo-symbols';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+    ActivityIndicator,
+    Image,
+    Platform,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getTheme, GRADIENT_COLORS } from '@/constants/theme';
 import ColorPreview from './ColorPreview';
 import GuessGrid from './GuessGrid';
 import Keyboard from './Keyboard';
@@ -19,22 +36,6 @@ import RulesModal from './RulesModal';
 import StatsModal from './StatsModal';
 import SuccessModal from './SuccessModal';
 import { useThemeMode } from './ThemeContext';
-import {
-  evaluateGuess,
-  getDayNumber,
-  getRandomPracticeColor,
-  getBestColorMatchPercent,
-  GuessEntry,
-} from '@/utils/gameLogic';
-import {
-  createFreshDailyState,
-  DailyState,
-  loadDailyState,
-  loadStats,
-  saveDailyState,
-  Stats,
-  updateStatsAfterGame,
-} from '@/utils/storage';
 
 function IconBtn({
   onPress,
@@ -257,7 +258,7 @@ export default function GameScreen() {
             >
               <SymbolView
                 name={{ ios: 'chart.bar.fill', android: 'bar_chart', web: 'bar_chart' }}
-                size={16}
+                size={18}
                 tintColor={theme.textPrimary}
               />
             </IconBtn>
@@ -272,7 +273,7 @@ export default function GameScreen() {
                     ? { ios: 'sun.max.fill', android: 'light_mode', web: 'light_mode' }
                     : { ios: 'moon.fill', android: 'dark_mode', web: 'dark_mode' }
                 }
-                size={16}
+                size={18}
                 tintColor={theme.textPrimary}
               />
             </IconBtn>
@@ -394,11 +395,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   content: {
-    paddingHorizontal: 16,
-    maxWidth: 360,
+    paddingHorizontal: 10,
+    ...(Platform.OS === 'web' ? { maxWidth: 420 } : {}),
     width: '100%',
     alignSelf: 'center',
-    gap: 12,
+    gap: 14,
   },
   header: {
     flexDirection: 'row',
@@ -407,35 +408,35 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   titleLogo: {
-    width: 24,
-    height: 24,
+    width: 28,
+    height: 28,
     flexShrink: 0,
   },
   headerActions: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 8,
     flexShrink: 0,
   },
   iconBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconBtnText: {
-    fontSize: 15,
+    fontSize: 17,
   },
   headerTextBtn: {
-    borderRadius: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    minHeight: 32,
+    borderRadius: 18,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    minHeight: 36,
     justifyContent: 'center',
   },
   headerTextBtnLabel: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '500',
   },
   pressed: {
@@ -493,11 +494,11 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   legendDot: {
-    width: 10,
-    height: 10,
+    width: 12,
+    height: 12,
     borderRadius: 3,
   },
   legendText: {
-    fontSize: 10,
+    fontSize: 11,
   },
 });

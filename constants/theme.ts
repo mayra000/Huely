@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 export type ThemeMode = 'light' | 'dark';
 

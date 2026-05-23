@@ -31,8 +31,11 @@
   },
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "ios:device": "bash scripts/ios-device.sh",
+    "ios:device:usb": "bash scripts/ios-device-usb.sh",
+    "ios:launch": "bash scripts/ios-launch.sh",
     "web": "expo start --web"
   },
   "private": true

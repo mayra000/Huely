@@ -22,9 +22,11 @@ function RootLayoutContent() {
   const colorScheme = useColorScheme();
   const { themeMode, ready: themeReady } = useThemeMode();
   const statusBarScheme = themeReady ? themeMode : colorScheme;
-  const backgroundColor = GRADIENT_COLORS[colorScheme][0];
   const [showLaunch, setShowLaunch] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const backgroundColor = showLaunch || isTransitioning
+    ? GRADIENT_COLORS.light[0]
+    : GRADIENT_COLORS[colorScheme][0];
   const launchOpacity = useRef(new Animated.Value(1)).current;
   const mainOpacity = useRef(new Animated.Value(0)).current;
   const mainTranslateY = useRef(new Animated.Value(28)).current;

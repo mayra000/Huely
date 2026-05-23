@@ -56,31 +56,31 @@ export default function ColorPreview({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 10,
   },
   card: {
     flex: 1,
     borderRadius: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
   },
   label: {
-    fontSize: 9,
+    fontSize: 10,
     fontWeight: '600',
     letterSpacing: 0.8,
-    marginBottom: 6,
+    marginBottom: 8,
   },
   swatch: {
-    height: 40,
+    height: 48,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
   question: {
-    fontSize: 18,
+    fontSize: 20,
   },
   hex: {
-    fontSize: 10,
-    marginTop: 5,
+    fontSize: 11,
+    marginTop: 6,
   },
 });

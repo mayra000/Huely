@@ -77,28 +77,28 @@ export default function GuessGrid({ theme, guesses, current, gameOver }: GuessGr
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    gap: 6,
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+    gap: 7,
   },
   row: {
     flexDirection: 'row',
-    gap: 5,
+    gap: 6,
     alignItems: 'center',
   },
   hash: {
-    width: 14,
-    fontSize: 10,
+    width: 16,
+    fontSize: 11,
   },
   tile: {
     flex: 1,
     aspectRatio: 1.15,
-    borderRadius: 8,
+    borderRadius: 9,
     alignItems: 'center',
     justifyContent: 'center',
   },
   tileText: {
-    fontSize: 11,
+    fontSize: 13,
     fontWeight: '600',
   },
 });
