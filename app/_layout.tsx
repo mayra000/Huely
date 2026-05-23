@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LaunchScreen from '@/components/LaunchScreen';
+import { ThemeProvider, useThemeMode } from '@/components/ThemeContext';
 import { useColorScheme } from '@/components/useColorScheme';
 import { GRADIENT_COLORS } from '@/constants/theme';
 
@@ -17,8 +18,10 @@ SplashScreen.preventAutoHideAsync();
 const LAUNCH_DURATION_MS = 1800;
 const TRANSITION_DURATION_MS = 480;
 
-export default function RootLayout() {
+function RootLayoutContent() {
   const colorScheme = useColorScheme();
+  const { themeMode, ready: themeReady } = useThemeMode();
+  const statusBarScheme = themeReady ? themeMode : colorScheme;
   const backgroundColor = GRADIENT_COLORS[colorScheme][0];
   const [showLaunch, setShowLaunch] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -73,7 +76,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style={showLaunch ? (colorScheme === 'dark' ? 'light' : 'dark') : 'auto'} />
+      <StatusBar style={statusBarScheme === 'dark' ? 'light' : 'dark'} />
       <View style={[styles.fullScreen, { backgroundColor }]}>
         <Animated.View
           pointerEvents={showLaunch ? 'none' : 'auto'}
@@ -107,6 +110,14 @@ export default function RootLayout() {
         )}
       </View>
     </SafeAreaProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutContent />
+    </ThemeProvider>
   );
 }
 

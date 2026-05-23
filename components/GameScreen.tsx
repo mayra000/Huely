@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -10,14 +11,14 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SymbolView } from 'expo-symbols';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getTheme, GRADIENT_COLORS, ThemeMode } from '@/constants/theme';
+import { getTheme, GRADIENT_COLORS } from '@/constants/theme';
 import ColorPreview from './ColorPreview';
 import GuessGrid from './GuessGrid';
 import Keyboard from './Keyboard';
 import RulesModal from './RulesModal';
 import StatsModal from './StatsModal';
 import SuccessModal from './SuccessModal';
-import { useColorScheme } from './useColorScheme';
+import { useThemeMode } from './ThemeContext';
 import {
   evaluateGuess,
   getDayNumber,
@@ -30,9 +31,7 @@ import {
   DailyState,
   loadDailyState,
   loadStats,
-  loadTheme,
   saveDailyState,
-  saveTheme,
   Stats,
   updateStatsAfterGame,
 } from '@/utils/storage';
@@ -65,8 +64,7 @@ function IconBtn({
 
 export default function GameScreen() {
   const insets = useSafeAreaInsets();
-  const systemColorScheme = useColorScheme();
-  const [themeMode, setThemeMode] = useState<ThemeMode>('light');
+  const { themeMode, setThemeMode } = useThemeMode();
   const [ready, setReady] = useState(false);
   const [isPractice, setIsPractice] = useState(false);
   const [target, setTarget] = useState('');
@@ -96,12 +94,7 @@ export default function GameScreen() {
 
   useEffect(() => {
     async function init() {
-      const [savedTheme, daily, savedStats] = await Promise.all([
-        loadTheme(),
-        loadDailyState(),
-        loadStats(),
-      ]);
-      setThemeMode(savedTheme);
+      const [daily, savedStats] = await Promise.all([loadDailyState(), loadStats()]);
       applyDailyState(daily);
       setStats(savedStats);
       setReady(true);
@@ -158,9 +151,7 @@ export default function GameScreen() {
   }
 
   function toggleTheme() {
-    const next: ThemeMode = themeMode === 'dark' ? 'light' : 'dark';
-    setThemeMode(next);
-    saveTheme(next);
+    setThemeMode(themeMode === 'dark' ? 'light' : 'dark');
   }
 
   function handleKey(k: string) {
@@ -205,7 +196,7 @@ export default function GameScreen() {
   if (!ready) {
     return (
       <LinearGradient
-        colors={[...GRADIENT_COLORS[systemColorScheme]]}
+        colors={[...GRADIENT_COLORS[themeMode]]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.loading}
@@ -230,7 +221,12 @@ export default function GameScreen() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.header}>
-          <Text style={[styles.title, { color: theme.textPrimary }]}>huely</Text>
+          <Image
+            source={require('@/assets/images/huely-logo.png')}
+            style={styles.titleLogo}
+            resizeMode="contain"
+            accessibilityLabel="Huely logo"
+          />
           <View style={styles.headerActions}>
             {isPractice ? (
               <Pressable
@@ -265,14 +261,21 @@ export default function GameScreen() {
                 tintColor={theme.textPrimary}
               />
             </IconBtn>
-            <Pressable
+            <IconBtn
               onPress={toggleTheme}
-              style={({ pressed }) => [styles.themeToggle, theme.glassCard, pressed && styles.pressed]}
+              label={themeMode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              theme={theme}
             >
-              <Text style={[styles.themeToggleText, { color: theme.textPrimary }]}>
-                {themeMode === 'dark' ? '☀ light' : '☾ dark'}
-              </Text>
-            </Pressable>
+              <SymbolView
+                name={
+                  themeMode === 'dark'
+                    ? { ios: 'sun.max.fill', android: 'light_mode', web: 'light_mode' }
+                    : { ios: 'moon.fill', android: 'dark_mode', web: 'dark_mode' }
+                }
+                size={16}
+                tintColor={theme.textPrimary}
+              />
+            </IconBtn>
           </View>
         </View>
 
@@ -400,19 +403,19 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: 8,
   },
-  title: {
-    flex: 1,
-    fontSize: 18,
-    fontWeight: '600',
-    letterSpacing: 2,
-    textTransform: 'lowercase',
+  titleLogo: {
+    width: 24,
+    height: 24,
+    flexShrink: 0,
   },
   headerActions: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+    flexShrink: 0,
   },
   iconBtn: {
     width: 32,
@@ -424,13 +427,6 @@ const styles = StyleSheet.create({
   iconBtnText: {
     fontSize: 15,
   },
-  themeToggle: {
-    borderRadius: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    minHeight: 32,
-    justifyContent: 'center',
-  },
   headerTextBtn: {
     borderRadius: 16,
     paddingHorizontal: 10,
@@ -439,10 +435,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerTextBtnLabel: {
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  themeToggleText: {
     fontSize: 11,
     fontWeight: '500',
   },

@@ -4,12 +4,16 @@
     "slug": "Huely",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/ios-icon-light.png",
     "scheme": "huely",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.huely.app"
+      "bundleIdentifier": "com.huely.app",
+      "icon": {
+        "light": "./assets/images/ios-icon-light.png",
+        "dark": "./assets/images/ios-icon-dark.png"
+      }
     },
     "android": {
       "adaptiveIcon": {

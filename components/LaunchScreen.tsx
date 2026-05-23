@@ -36,12 +36,22 @@ export default function LaunchScreen({ onLayout }: LaunchScreenProps) {
         style={StyleSheet.absoluteFill}
       />
       <View style={styles.logoArea}>
-        <Image
-          source={require('@/assets/images/huely-logo.png')}
-          style={styles.logo}
-          resizeMode="contain"
-          accessibilityLabel="Huely logo"
-        />
+        <View style={styles.logoGroup}>
+          <Image
+            source={require('@/assets/images/huely-logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+            accessibilityLabel="Huely logo"
+          />
+          <Animated.Text
+            style={[
+              styles.title,
+              { color: theme.textPrimary, opacity: creditOpacity },
+            ]}
+          >
+            HUELY
+          </Animated.Text>
+        </View>
       </View>
       <Animated.Text
         style={[
@@ -68,10 +78,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  logoGroup: {
+    alignItems: 'center',
+    transform: [{ translateY: -450 }],
+  },
   logo: {
     width: LOGO_SIZE,
     height: LOGO_SIZE,
-    transform: [{ translateY: -450 }],
+  },
+  title: {
+    marginTop: 16,
+    fontSize: 32,
+    fontWeight: '700',
+    letterSpacing: 6,
   },
   credit: {
     position: 'absolute',
