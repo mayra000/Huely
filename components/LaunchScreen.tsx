@@ -2,16 +2,16 @@ import { useEffect, useRef } from 'react';
 import { Animated, Easing, Image, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getTheme, GRADIENT_COLORS } from '@/constants/theme';
+import { DEFAULT_THEME_MODE, getTheme, GRADIENT_COLORS } from '@/constants/theme';
 
-const LOGO_SIZE = 180;
+const LOGO_SIZE = 153;
 
 type LaunchScreenProps = {
   onLayout?: () => void;
 };
 
 export default function LaunchScreen({ onLayout }: LaunchScreenProps) {
-  const theme = getTheme('light');
+  const theme = getTheme(DEFAULT_THEME_MODE);
   const insets = useSafeAreaInsets();
   const creditOpacity = useRef(new Animated.Value(0)).current;
 
@@ -28,7 +28,7 @@ export default function LaunchScreen({ onLayout }: LaunchScreenProps) {
   return (
     <View style={styles.container} onLayout={onLayout}>
       <LinearGradient
-        colors={[...GRADIENT_COLORS.light]}
+        colors={[...GRADIENT_COLORS[DEFAULT_THEME_MODE]]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={StyleSheet.absoluteFill}
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   logoGroup: {
     alignItems: 'center',
-    transform: [{ translateY: -450 }],
+    transform: [{ translateY: 20 }],
   },
   logo: {
     width: LOGO_SIZE,

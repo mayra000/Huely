@@ -2,6 +2,8 @@ import { Platform, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 export type ThemeMode = 'light' | 'dark';
 
+export const DEFAULT_THEME_MODE: ThemeMode = 'dark';
+
 export const GRADIENT_COLORS = {
   light: ['#c9d6df', '#e2ebf0', '#d4c5e2'] as const,
   dark: ['#1a1a2e', '#16213e', '#0f3460'] as const,

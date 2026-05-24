@@ -4,9 +4,9 @@
     "slug": "Huely",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/ios-icon-light.png",
+    "icon": "./assets/images/ios-icon-dark.png",
     "scheme": "huely",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.huely.app",
@@ -17,7 +17,7 @@
         ]
       },
       "icon": {
-        "light": "./assets/images/ios-icon-light.png",
+        "light": "./assets/images/ios-icon-dark.png",
         "dark": "./assets/images/ios-icon-dark.png"
       }
     },
@@ -40,13 +40,14 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#c9d6df",
+          "backgroundColor": "#1a1a2e",
           "dark": {
-            "backgroundColor": "#c9d6df"
+            "backgroundColor": "#1a1a2e"
           }
         }
       ],
-      "expo-sharing"
+      "expo-sharing",
+      "expo-notifications"
     ],
     "experiments": {
       "typedRoutes": true

@@ -15,6 +15,7 @@ import {
     Stats,
     updateStatsAfterGame,
 } from '@/utils/storage';
+import { syncStreakReminder } from '@/utils/streakNotifications';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SymbolView } from 'expo-symbols';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -99,6 +100,7 @@ export default function GameScreen() {
       applyDailyState(daily);
       setStats(savedStats);
       setReady(true);
+      void syncStreakReminder(savedStats);
     }
     init();
   }, [applyDailyState]);
@@ -129,6 +131,7 @@ export default function GameScreen() {
         const updated = await updateStatsAfterGame(won, guesses.length);
         setStats(updated);
         await persistDaily({ gameOver: true, won, guesses });
+        await syncStreakReminder(updated);
       }
     }
 

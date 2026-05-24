@@ -7,8 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LaunchScreen from '@/components/LaunchScreen';
 import { ThemeProvider, useThemeMode } from '@/components/ThemeContext';
-import { useColorScheme } from '@/components/useColorScheme';
-import { GRADIENT_COLORS } from '@/constants/theme';
+import { DEFAULT_THEME_MODE, GRADIENT_COLORS } from '@/constants/theme';
 
 const DevMenuPreferences = requireOptionalNativeModule('DevMenuPreferences');
 DevMenuPreferences?.setPreferencesAsync({ showFloatingActionButton: false });
@@ -19,14 +18,11 @@ const LAUNCH_DURATION_MS = 1800;
 const TRANSITION_DURATION_MS = 480;
 
 function RootLayoutContent() {
-  const colorScheme = useColorScheme();
   const { themeMode, ready: themeReady } = useThemeMode();
-  const statusBarScheme = themeReady ? themeMode : colorScheme;
+  const activeThemeMode = themeReady ? themeMode : DEFAULT_THEME_MODE;
   const [showLaunch, setShowLaunch] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const backgroundColor = showLaunch || isTransitioning
-    ? GRADIENT_COLORS.light[0]
-    : GRADIENT_COLORS[colorScheme][0];
+  const backgroundColor = GRADIENT_COLORS[activeThemeMode][0];
   const launchOpacity = useRef(new Animated.Value(1)).current;
   const mainOpacity = useRef(new Animated.Value(0)).current;
   const mainTranslateY = useRef(new Animated.Value(28)).current;
@@ -78,7 +74,7 @@ function RootLayoutContent() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style={statusBarScheme === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={activeThemeMode === 'dark' ? 'light' : 'dark'} />
       <View style={[styles.fullScreen, { backgroundColor }]}>
         <Animated.View
           pointerEvents={showLaunch ? 'none' : 'auto'}
@@ -128,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   launchOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 10,
   },
 });

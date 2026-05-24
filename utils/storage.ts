@@ -5,7 +5,7 @@ import {
   getYesterdayDateKey,
   GuessEntry,
 } from './gameLogic';
-import { ThemeMode } from '@/constants/theme';
+import { DEFAULT_THEME_MODE, ThemeMode } from '@/constants/theme';
 
 const THEME_KEY = '@huely/theme';
 const STATS_KEY = '@huely/stats';
@@ -53,7 +53,7 @@ async function writeJson<T>(key: string, value: T): Promise<void> {
 
 export async function loadTheme(): Promise<ThemeMode> {
   const value = await AsyncStorage.getItem(THEME_KEY);
-  return value === 'dark' ? 'dark' : 'light';
+  return value === 'light' ? 'light' : DEFAULT_THEME_MODE;
 }
 
 export async function saveTheme(mode: ThemeMode): Promise<void> {

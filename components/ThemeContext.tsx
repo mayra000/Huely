@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ThemeMode } from '@/constants/theme';
+import { DEFAULT_THEME_MODE, ThemeMode } from '@/constants/theme';
 import { loadTheme, saveTheme } from '@/utils/storage';
 
 type ThemeContextValue = {
@@ -11,7 +11,7 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [themeMode, setThemeModeState] = useState<ThemeMode>('light');
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(DEFAULT_THEME_MODE);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
