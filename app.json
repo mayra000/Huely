@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Hexli",
-    "slug": "Hexli",
+    "slug": "hexli",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/ios-icon-dark.png",
@@ -11,12 +11,18 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.hexli.app",
       "infoPlist": {
+        "CFBundleDisplayName": "Hexli",
+        "CFBundleName": "Hexli",
         "NSLocalNetworkUsageDescription": "Hexli uses the local network during development to load JavaScript from Metro on your computer.",
         "NSBonjourServices": [
           "_http._tcp"
         ]
       },
-      "icon": "./assets/images/ios-icon-dark.png"
+      "icon": {
+        "light": "./assets/images/ios-icon-dark.png",
+        "dark": "./assets/images/ios-icon-dark.png",
+        "tinted": "./assets/images/ios-icon-dark.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
