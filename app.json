@@ -16,10 +16,7 @@
           "_http._tcp"
         ]
       },
-      "icon": {
-        "light": "./assets/images/ios-icon-dark.png",
-        "dark": "./assets/images/ios-icon-dark.png"
-      }
+      "icon": "./assets/images/ios-icon-dark.png"
     },
     "android": {
       "adaptiveIcon": {
@@ -51,6 +48,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ba469107-e186-43cb-928a-01a504e35706"
+      }
     }
   }
 }
