@@ -33,7 +33,7 @@ for iface in en0 en1 en2 en3; do
 done
 
 echo ""
-echo "Huely — Wi-Fi device run"
+echo "Hexli - Wi-Fi device run"
 echo "  Metro port: $METRO_PORT"
 if [[ -n "$IP" ]]; then
   echo "  Mac IP:     $IP"
@@ -44,13 +44,13 @@ if [[ -n "$IP" ]]; then
   echo ""
   echo "If Safari cannot load that page:"
   echo "  • Phone + Mac must be on the same Wi-Fi (not guest Wi-Fi)"
-  echo "  • Settings → Privacy & Security → Local Network → Huely → ON"
+  echo "  • Settings → Privacy & Security → Local Network → Hexli → ON"
   echo "  • Or use USB instead: npm run ios:device:usb"
 else
   echo "  Mac IP:     (not found — connect to Wi-Fi first)"
 fi
 echo ""
-echo "After install: keep this terminal open, then open Huely or run npm run ios:launch"
+echo "After install: keep this terminal open, then open Hexli or run npm run ios:launch"
 echo ""
 
 exec npx expo run:ios --device --port "$METRO_PORT" "$@"

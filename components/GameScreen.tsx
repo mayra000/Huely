@@ -226,10 +226,10 @@ export default function GameScreen() {
       >
         <View style={styles.header}>
           <Image
-            source={require('@/assets/images/huely-logo.png')}
+            source={require('@/assets/images/hexli-logo.png')}
             style={styles.titleLogo}
             resizeMode="contain"
-            accessibilityLabel="Huely logo"
+            accessibilityLabel="Hexli logo"
           />
           <View style={styles.headerActions}>
             {isPractice ? (

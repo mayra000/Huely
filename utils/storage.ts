@@ -7,9 +7,9 @@ import {
 } from './gameLogic';
 import { DEFAULT_THEME_MODE, ThemeMode } from '@/constants/theme';
 
-const THEME_KEY = '@huely/theme';
-const STATS_KEY = '@huely/stats';
-const DAILY_KEY = '@huely/daily';
+const THEME_KEY = '@hexli/theme';
+const STATS_KEY = '@hexli/stats';
+const DAILY_KEY = '@hexli/daily';
 
 export interface DailyState {
   date: string;

@@ -36,10 +36,10 @@ export default function LaunchScreen({ onLayout }: LaunchScreenProps) {
       <View style={styles.logoArea}>
         <View style={styles.logoGroup}>
           <Image
-            source={require('@/assets/images/huely-logo.png')}
+            source={require('@/assets/images/hexli-logo.png')}
             style={styles.logo}
             resizeMode="contain"
-            accessibilityLabel="Huely logo"
+            accessibilityLabel="Hexli logo"
           />
           <Animated.Text
             style={[
@@ -47,7 +47,7 @@ export default function LaunchScreen({ onLayout }: LaunchScreenProps) {
               { color: theme.textPrimary, opacity: creditOpacity },
             ]}
           >
-            HUELY
+            HEXLI
           </Animated.Text>
         </View>
       </View>

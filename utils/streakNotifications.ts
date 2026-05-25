@@ -4,9 +4,9 @@ import { Platform } from 'react-native';
 import { formatDateKey, getYesterdayDateKey } from './gameLogic';
 import type { Stats } from './storage';
 
-const REMINDER_STATE_KEY = '@huely/streakReminder';
+const REMINDER_STATE_KEY = '@hexli/streakReminder';
 const REMINDER_CHANNEL_ID = 'streak-reminders';
-const STREAK_REMINDER_KIND = 'huely-streak-reminder';
+const STREAK_REMINDER_KIND = 'hexli-streak-reminder';
 const REMINDER_HOUR = 19;
 const REMINDER_MINUTE = 0;
 const MISSED_REMINDER_DELAY_MS = 60 * 1000;
@@ -161,7 +161,7 @@ async function syncStreakReminderInternal(stats: Stats, now: Date): Promise<void
   const streakLabel = `${stats.currentStreak}-day`;
   const notificationId = await Notifications.scheduleNotificationAsync({
     content: {
-      title: 'Keep your Huely streak alive',
+      title: 'Keep your Hexli streak alive',
       body: `Today's color is waiting. Play before midnight to keep your ${streakLabel} streak.`,
       data: {
         kind: STREAK_REMINDER_KIND,

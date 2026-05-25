@@ -155,7 +155,7 @@ export function buildShareMessage(
   won: boolean,
 ): string {
   const score = won ? `${guesses.length}/5` : 'X/5';
-  return `Huely #${day} ${score}\n\n${buildEmojiGrid(guesses)}`;
+  return `Hexli #${day} ${score}\n\n${buildEmojiGrid(guesses)}`;
 }
 
 export function getYesterdayDateKey(date: Date = new Date()): string {

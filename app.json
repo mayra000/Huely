@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Huely",
-    "slug": "Huely",
+    "name": "Hexli",
+    "slug": "Hexli",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/ios-icon-dark.png",
-    "scheme": "huely",
+    "scheme": "hexli",
     "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.huely.app",
+      "bundleIdentifier": "com.hexli.app",
       "infoPlist": {
-        "NSLocalNetworkUsageDescription": "Huely uses the local network during development to load JavaScript from Metro on your computer.",
+        "NSLocalNetworkUsageDescription": "Hexli uses the local network during development to load JavaScript from Metro on your computer.",
         "NSBonjourServices": [
           "_http._tcp"
         ]

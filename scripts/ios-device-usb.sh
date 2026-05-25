@@ -46,7 +46,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 echo ""
-echo "Huely — USB device run"
+echo "Hexli - USB device run"
 echo "  Metro port: $METRO_PORT"
 echo "  Mode:       localhost via iproxy (no Local Network permission needed)"
 echo ""
@@ -54,7 +54,7 @@ echo "Requirements:"
 echo "  • iPhone connected by USB cable"
 echo "  • Trust this computer on the phone if prompted"
 echo ""
-echo "After install: keep this terminal open, then open Huely or run npm run ios:launch"
+echo "After install: keep this terminal open, then open Hexli or run npm run ios:launch"
 echo ""
 
 npx expo run:ios --device --port "$METRO_PORT" "$@"
