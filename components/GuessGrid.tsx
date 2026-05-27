@@ -20,7 +20,10 @@ export default function GuessGrid({ theme, guesses, current, gameOver }: GuessGr
     <View style={[styles.container, theme.glassCard]}>
       {guesses.map((g, ri) => (
         <View key={ri} style={styles.row}>
-          <Text style={[styles.hash, { color: theme.textMuted, fontFamily: monoFont }]}>#</Text>
+          <View
+            accessibilityLabel={`Submitted color #${g.code}`}
+            style={[styles.guessColorSwatch, { backgroundColor: `#${g.code}` }]}
+          />
           {g.code.split('').map((ch, ci) => {
             const tileStyle = getTileStyle(g.result[ci], theme);
             return (
@@ -89,6 +92,11 @@ const styles = StyleSheet.create({
   hash: {
     width: 16,
     fontSize: 11,
+  },
+  guessColorSwatch: {
+    width: 16,
+    height: 16,
+    borderRadius: 4,
   },
   tile: {
     flex: 1,
