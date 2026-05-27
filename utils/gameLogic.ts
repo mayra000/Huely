@@ -145,6 +145,8 @@ const EMOJI_MAP: Record<TileResult, string> = {
   miss: '⚫',
 };
 
+const APP_STORE_URL = 'https://apps.apple.com/us/app/hexli/id6772888844';
+
 export function buildEmojiGrid(guesses: GuessEntry[]): string {
   return guesses.map((g) => g.result.map((r) => EMOJI_MAP[r]).join('')).join('\n');
 }
@@ -155,7 +157,7 @@ export function buildShareMessage(
   won: boolean,
 ): string {
   const score = won ? `${guesses.length}/5` : 'X/5';
-  return `Hexli #${day} ${score}\n\n${buildEmojiGrid(guesses)}`;
+  return `Hexli #${day} ${score}\n\n${buildEmojiGrid(guesses)}\n\nPlay Hexli: ${APP_STORE_URL}`;
 }
 
 export function getYesterdayDateKey(date: Date = new Date()): string {

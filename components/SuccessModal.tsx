@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { AppTheme } from '@/constants/theme';
-import { buildEmojiGrid, GuessEntry } from '@/utils/gameLogic';
+import { buildEmojiGrid, getBestColorMatchPercent, GuessEntry } from '@/utils/gameLogic';
 import { copyShareMessage } from './ShareSheet';
 
 interface SuccessModalProps {
@@ -18,6 +18,7 @@ interface SuccessModalProps {
   guesses: GuessEntry[];
   targetColor: string;
   isPractice: boolean;
+  won: boolean;
   onClose: () => void;
   onTryAnother?: () => void;
 }
@@ -29,15 +30,17 @@ export default function SuccessModal({
   guesses,
   targetColor,
   isPractice,
+  won,
   onClose,
   onTryAnother,
 }: SuccessModalProps) {
   const [copied, setCopied] = useState(false);
   const guessCount = guesses.length;
   const emojiGrid = buildEmojiGrid(guesses);
+  const bestMatch = getBestColorMatchPercent(guesses, targetColor);
 
   async function handleCopy() {
-    await copyShareMessage(day, guesses, true);
+    await copyShareMessage(day, guesses, won);
     setCopied(true);
   }
 
@@ -56,11 +59,25 @@ export default function SuccessModal({
                 style={[styles.colorSwatch, { backgroundColor: `#${targetColor}` }]}
               />
 
-              <Text style={[styles.title, { color: theme.winText }]}>Nice eye!</Text>
-              <Text style={[styles.subtitle, { color: theme.textPrimary }]}>
-                You got it in {guessCount} guess{guessCount === 1 ? '' : 'es'}
-                {isPractice ? ' (practice)' : ''}
+              <Text style={[styles.title, { color: won ? theme.winText : theme.lossText }]}>
+                {won ? 'Nice eye!' : 'So close!'}
               </Text>
+              {won ? (
+                <Text style={[styles.subtitle, { color: theme.textPrimary }]}>
+                  You got it in {guessCount} guess{guessCount === 1 ? '' : 'es'}
+                  {isPractice ? ' (practice)' : ''}
+                </Text>
+              ) : (
+                <View style={styles.lossDetails}>
+                  <Text style={[styles.subtitle, { color: theme.textPrimary }]}>
+                    The color was #{targetColor}
+                    {isPractice ? ' (practice)' : ''}
+                  </Text>
+                  <Text style={[styles.detailText, { color: theme.textMuted }]}>
+                    Best guess: {bestMatch}% color match
+                  </Text>
+                </View>
+              )}
 
               <View style={styles.emojiGrid}>
                 {emojiGrid.split('\n').map((row, i) => (
@@ -139,6 +156,14 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     fontWeight: '500',
+    textAlign: 'center',
+  },
+  lossDetails: {
+    alignItems: 'center',
+    gap: 3,
+  },
+  detailText: {
+    fontSize: 12,
     textAlign: 'center',
   },
   emojiGrid: {

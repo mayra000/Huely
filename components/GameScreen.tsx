@@ -76,7 +76,7 @@ export default function GameScreen() {
   const [won, setWon] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showStats, setShowStats] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showResultModal, setShowResultModal] = useState(false);
   const [stats, setStats] = useState<Stats | null>(null);
   const hasFinishedRef = useRef(false);
 
@@ -90,7 +90,7 @@ export default function GameScreen() {
     setCurrent('');
     setGameOver(state.gameOver);
     setWon(state.won);
-    setShowSuccessModal(false);
+    setShowResultModal(false);
     hasFinishedRef.current = state.gameOver;
   }, []);
 
@@ -145,7 +145,7 @@ export default function GameScreen() {
     setCurrent('');
     setGameOver(false);
     setWon(false);
-    setShowSuccessModal(false);
+    setShowResultModal(false);
     hasFinishedRef.current = false;
   }
 
@@ -181,9 +181,10 @@ export default function GameScreen() {
     if (didWin) {
       setWon(true);
       setGameOver(true);
-      setShowSuccessModal(true);
+      setShowResultModal(true);
     } else if (didLose) {
       setGameOver(true);
+      setShowResultModal(true);
     }
 
     if (!isPractice) {
@@ -375,13 +376,14 @@ export default function GameScreen() {
         onClose={() => setShowStats(false)}
       />
       <SuccessModal
-        visible={showSuccessModal}
+        visible={showResultModal}
         theme={theme}
         day={getDayNumber()}
         guesses={guesses}
         targetColor={target}
         isPractice={isPractice}
-        onClose={() => setShowSuccessModal(false)}
+        won={won}
+        onClose={() => setShowResultModal(false)}
         onTryAnother={startPractice}
       />
     </LinearGradient>
