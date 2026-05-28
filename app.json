@@ -2,7 +2,7 @@
   "expo": {
     "name": "Hexli",
     "slug": "hexli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/ios-icon-dark.png",
     "scheme": "hexli",
@@ -10,6 +10,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.hexli.app",
+      "buildNumber": "5",
       "infoPlist": {
         "CFBundleDisplayName": "Hexli",
         "CFBundleName": "Hexli",
